@@ -2,13 +2,20 @@
 
 ![Go](https://github.com/SergeAx/health-go/workflows/Go/badge.svg)
 
-Golang implementation of the upcoming [IETF RFC Health Check Response Format](https://tools.ietf.org/id/draft-inadarei-api-health-check-04.html) for HTTP APIs.
+This is a stripped down fork of `github.com/nelkinda/health-go` by @SergeAx.
+
+My goals were:
+
+1. Get rid of *massive* number of deps
+2. get rid of build errors under Windows due to using Linux-specific syscalls.
+
+Golang implementation of the upcoming [IETF RFC Health Check Response Format](https://tools.ietf.org/id/draft-inadarei-api-health-check-06.html) for HTTP APIs.
 
 ## Usage
 In your go program,
 
 1. Create the health Handler.
-1. Add the handler to your mux/server.
+2. Add the handler to your mux/server.
 
 ```go
 package main
