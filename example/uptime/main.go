@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/nelkinda/health-go"
-	"github.com/nelkinda/health-go/checks/uptime"
 	"io"
 	"net"
 	"net/http"
@@ -12,6 +10,9 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+
+	"github.com/SergeAx/health-go"
+	"github.com/SergeAx/health-go/checks/uptime"
 )
 
 func main() {

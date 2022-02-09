@@ -1,9 +1,10 @@
 package uptime
 
 import (
-	"github.com/nelkinda/health-go"
 	"net/http"
 	"time"
+
+	"github.com/SergeAx/health-go"
 )
 
 type process struct {

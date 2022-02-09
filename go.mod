@@ -1,4 +1,4 @@
-module github.com/nelkinda/health-go
+module github.com/SergeAx/health-go
 
 go 1.14
 

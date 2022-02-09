@@ -2,10 +2,11 @@
 package uptime
 
 import (
-	"github.com/nelkinda/health-go"
 	"net/http"
 	"syscall"
 	"time"
+
+	"github.com/SergeAx/health-go"
 )
 
 type system struct {

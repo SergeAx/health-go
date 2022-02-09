@@ -6,11 +6,12 @@ package sysinfo
 
 import (
 	"fmt"
-	"github.com/nelkinda/health-go"
 	"net/http"
 	"os"
 	"syscall"
 	"time"
+
+	"github.com/SergeAx/health-go"
 )
 
 type sysinfo struct {

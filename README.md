@@ -1,6 +1,6 @@
 # `health-go`
 
-![Go](https://github.com/nelkinda/health-go/workflows/Go/badge.svg)
+![Go](https://github.com/SergeAx/health-go/workflows/Go/badge.svg)
 
 Golang implementation of the upcoming [IETF RFC Health Check Response Format](https://tools.ietf.org/id/draft-inadarei-api-health-check-04.html) for HTTP APIs.
 
@@ -14,7 +14,7 @@ In your go program,
 package main
 
 import (
-	"github.com/nelkinda/health-go"
+	"github.com/SergeAx/health-go"
 	"net/http"
 )
 
@@ -35,7 +35,6 @@ If is possible to provide checks.
 This library comes with the following checks predefined:
 - system uptime
 - process uptime
-- mongodb health
 - SendGrid health
 - sysinfo information (CPU Utilization, RAM, uptime, number of processes)
 
@@ -46,18 +45,15 @@ package main
 
 import (
 	"context"
-	"github.com/nelkinda/health-go"
-	"github.com/nelkinda/health-go/checks/uptime"
-	"github.com/nelkinda/health-go/checks/sysinfo"
-	"github.com/nelkinda/health-go/checks/mongodb"
-	"github.com/nelkinda/health-go/checks/sendgrid"
+	"github.com/SergeAx/health-go"
+	"github.com/SergeAx/health-go/checks/uptime"
+	"github.com/SergeAx/health-go/checks/sysinfo"
+	"github.com/SergeAx/health-go/checks/sendgrid"
 	"net/http"
 	"time"
 )
 
 func main() {
-	url := "mongodb://127.0.0.1:27017"
-	client, _ := mongo.NewClient(options.Client().ApplyURI(url))
 	_ = client.Connect(context.Background())
 	h := health.New(
 		health.Health{
@@ -66,7 +62,6 @@ func main() {
 		},
 		uptime.System(),
 		uptime.Process(),
-		mongodb.Health(url, client, time.Duration(10)*time.Second, time.Duration(40)*time.Microsecond),
 		sendgrid.Health(),
 		sysinfo.Health(),
 	)

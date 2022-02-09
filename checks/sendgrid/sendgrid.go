@@ -2,9 +2,10 @@ package sendgrid
 
 import (
 	"encoding/json"
-	"github.com/nelkinda/health-go"
 	"net/http"
 	"time"
+
+	"github.com/SergeAx/health-go"
 )
 
 type sendGrid struct{}

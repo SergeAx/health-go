@@ -5,8 +5,9 @@
 package sysinfo
 
 import (
-	"github.com/nelkinda/health-go"
 	"net/http"
+
+	"github.com/SergeAx/health-go"
 )
 
 type sysinfo struct {

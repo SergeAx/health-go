@@ -6,8 +6,8 @@
 //  package main
 //
 //  import (
-//  	"github.com/nelkinda/health-go"
-//  	"github.com/nelkinda/health-go/checks/uptime"
+//  	"github.com/SergeAx/health-go"
+//  	"github.com/SergeAx/health-go/checks/uptime"
 //  	"net/http"
 //  )
 //
