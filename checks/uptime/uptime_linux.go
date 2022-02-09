@@ -1,4 +1,4 @@
-// +build linux
+//go:build linux
 
 package uptime
 
@@ -6,7 +6,7 @@ import (
 	"syscall"
 )
 
-func upTime() (int, error) {
+func upTime() (int64, error) {
 	si := &syscall.Sysinfo_t{}
 	err := syscall.Sysinfo(si)
 	if err == nil {

@@ -1,5 +1,4 @@
 //go:build windows
-// +build windows
 
 package uptime
 
@@ -18,7 +17,7 @@ var (
 	procGetTickCount64 = ModKernel32.NewProc("GetTickCount64")
 )
 
-func upTime() (int, error) {
+func upTime() (int64, error) {
 	procGetTickCount := procGetTickCount64
 	err := procGetTickCount64.Find()
 	if err != nil {
@@ -28,5 +27,5 @@ func upTime() (int, error) {
 	if lastErr != 0 {
 		return 0, lastErr
 	}
-	return int((time.Duration(r1) * time.Millisecond).Seconds()), nil
+	return int64((time.Duration(r1) * time.Millisecond).Seconds()), nil
 }
