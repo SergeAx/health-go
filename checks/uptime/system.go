@@ -3,7 +3,6 @@ package uptime
 
 import (
 	"net/http"
-	"syscall"
 	"time"
 
 	"github.com/SergeAx/health-go"
@@ -13,8 +12,7 @@ type system struct {
 }
 
 func (u *system) HealthChecks() map[string][]health.Checks {
-	si := &syscall.Sysinfo_t{}
-	err := syscall.Sysinfo(si)
+	ut, err := upTime()
 	now := time.Now().UTC().Format(time.RFC3339Nano)
 	var uptime func() health.Checks
 	if err != nil {
@@ -30,7 +28,7 @@ func (u *system) HealthChecks() map[string][]health.Checks {
 		uptime = func() health.Checks {
 			return health.Checks{
 				ComponentType: "system",
-				ObservedValue: si.Uptime,
+				ObservedValue: ut,
 				ObservedUnit:  "s",
 				Status:        health.Pass,
 				Time:          now,
