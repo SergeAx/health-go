@@ -32,8 +32,6 @@ package health
 
 import (
 	"encoding/json"
-	"github.com/nelkinda/http-go/header"
-	"github.com/nelkinda/http-go/mimetype"
 	"net/http"
 )
 
@@ -219,7 +217,7 @@ type ChecksProvider interface {
 // @Success 200 {object} health.Health
 // @Router /health [GET]
 func (h *Service) Handler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add(header.ContentType, mimetype.ApplicationHealthJson)
+	w.Header().Add("Content-Type", "application/health+json")
 	if r.Method == http.MethodOptions {
 		w.Header().Set("Allow", "OPTIONS, GET, HEAD")
 		w.Header().Set("Cache-Control", "max-age=604800")
