@@ -3,7 +3,6 @@ package health
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/christianhujer/assert"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -58,7 +57,9 @@ func assertHealthResponseCode(t *testing.T, method string, expectedStatusCode in
 	w := httptest.NewRecorder()
 	handler(w, r)
 
-	_ = assert.Equals(t, expectedStatusCode, w.Code)
+	if w.Code != expectedStatusCode {
+		t.Errorf("Error code: got %d, want %d", w.Code, expectedStatusCode)
+	}
 }
 
 func TestHandlerResponseCodes(t *testing.T) {
@@ -103,7 +104,6 @@ func TestHandlerResponse(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	_ = assert.Nil(t, err)
 }
 
 // AssertJSONBytes asserts that two JSON structures given as binary data are equal.
@@ -159,7 +159,13 @@ func EqualsWithCaptureAndReplace(t *testing.T, input string, pattern string) err
 		}
 	}
 	pattern = replace(pattern)
-	return assert.True(t, regexp.MustCompile(pattern).MatchString(input))
+
+	if !regexp.MustCompile(pattern).MatchString(input) {
+		t.Error("Input doesn't match pattern")
+		return fmt.Errorf("input doesn't match pattern")
+	}
+
+	return nil
 }
 
 func replace(pattern string) string {
@@ -178,7 +184,7 @@ func ResetVariables(_ interface{}) {
 func assertCoverage() int {
 	if testing.CoverMode() != "" {
 		if c := testing.Coverage(); c < 1.0 {
-			fmt.Printf("Coverage failed at %.1f%%\n", c * 100)
+			fmt.Printf("Coverage failed at %.1f%%\n", c*100)
 			return 1
 		}
 	}
@@ -193,5 +199,5 @@ func TestMain(m *testing.M) {
 	if st := assertCoverage(); st > status {
 		status = st
 	}
-    os.Exit(status)
+	os.Exit(status)
 }
